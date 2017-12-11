@@ -8,25 +8,31 @@
 	<title>Insert title here</title>
 </h:head>
 <h:body>
-	<p:dataTable var="nota" value="#{notaBean.notas}">
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Id" />
-			</f:facet>
-			<h:outputText value="#{nota.id}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Título" />
-			</f:facet>
-			<h:outputText value="#{nota.title}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">
-				<h:outputText value="Corpo" />
-			</f:facet>
-			<h:outputText value="#{nota.body}" />
-		</p:column>
-	</p:dataTable>
+	<h:form>
+		<p:dataTable var="nota" value="#{notaBean.notas}">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{nota.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Título" />
+				</f:facet>
+				<h:link value="#{nota.title}" outcome="detalhes">
+					<f:param name="id" value="#{nota.id}" />
+				</h:link>
+			<!-- <h:commandLink value="#{nota.title}"
+					action="#{notaBean.exibir(nota)}" />  -->
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Corpo" />
+				</f:facet>
+				<h:outputText value="#{nota.body}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
 </h:body>
 </html>

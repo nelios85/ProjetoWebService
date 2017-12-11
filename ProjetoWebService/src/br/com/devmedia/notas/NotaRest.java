@@ -7,20 +7,27 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 public class NotaRest {
-
+	private Client client;
+	private WebResource webResource;
+	
+	public NotaRest() {
+		client = Client.create();
+		webResource = client.resource("http://devmedianotesapi.azurewebsites.net/api/");
+	}
+	
 	public List<Notas> listar() {
-		Client client = Client.create();
-		WebResource webResource = client.resource("http://devmedianotesapi.azurewebsites.net/api/");
 		return webResource.path("Notes").get(new GenericType<List<Notas>>() {
 		});
 	}
 	
+	public Notas obter(Integer id) {
+		return webResource.path("Notes").path(id.toString()).get(new GenericType<Notas>(){});
+		
+	}
+	
 	public static void main(String...args) {
 		NotaRest notaRest = new NotaRest();
-		List<Notas> list = notaRest.listar();
-		for(Notas notas: list) {
-			System.out.println(notas.getTitle());
-		}
+		notaRest.obter(753); 
 	}
 
 }

@@ -11,29 +11,24 @@
 </f:metadata>
 
 <h:head>
-	<title>WebService</title>
+	<title>WebService - Editar</title>
 </h:head>
 <h:body>
 	<h:form>
 		<h:panelGroup>
 			<p:outputLabel for="id" value="Id: " />
-			<h:outputText id="id" value="#{notaBean.nota.id}" />
+			<h:inputText id="id" value="#{notaBean.nota.id}" />
 		</h:panelGroup>
 		<br></br>
 		<h:panelGroup>
 			<p:outputLabel for="title" value="Título: " />
-			<h:outputText id="title" value="#{notaBean.nota.title}" />
+			<h:inputText id="title" value="#{notaBean.nota.title}" />
 		</h:panelGroup>
 		<h:panelGroup>
 			<p:outputLabel for="body" value="Corpo: " />
-			<h:outputText id="body" value="#{notaBean.nota.body}" />
+			<h:inputText id="body" value="#{notaBean.nota.body}" />
 		</h:panelGroup>
-		<br />
-		<h:link value="Editar" outcome="editar">
-			<f:param name="id" value="#{notaBean.nota.id}" />
-		</h:link>
-		<h:commandLink value="Remover"
-			action="#{notaBean.remover(notaBean.nota.id)}" />
+		<h:commandButton value="Salvar" action="#{notaBean.editar()}" />
 	</h:form>
 </h:body>
 </html>

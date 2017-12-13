@@ -1,8 +1,10 @@
 package br.com.devmedia.notas;
 
+import com.owlike.genson.annotation.JsonIgnore;
 import com.owlike.genson.annotation.JsonProperty;
 
 public class Notas {
+	
 	@JsonProperty("Id")
 	private Integer id;
 	
@@ -13,21 +15,28 @@ public class Notas {
 	private String body;
 	
 	
+	@JsonIgnore
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@JsonIgnore
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	@JsonIgnore
 	public String getBody() {
 		return body;
 	}
+	
 	public void setBody(String body) {
 		this.body = body;
 	}

@@ -5,10 +5,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Insert title here</title>
+	<title>Index</title>
 </h:head>
 <h:body>
 	<h:form>
+		<h:link value="Novo" outcome="editar"></h:link>
 		<p:dataTable var="nota" value="#{notaBean.notas}">
 			<p:column>
 				<f:facet name="header">
@@ -23,7 +24,7 @@
 				<h:link value="#{nota.title}" outcome="detalhes">
 					<f:param name="id" value="#{nota.id}" />
 				</h:link>
-			<!-- <h:commandLink value="#{nota.title}"
+				<!-- <h:commandLink value="#{nota.title}"
 					action="#{notaBean.exibir(nota)}" />  -->
 			</p:column>
 			<p:column>
@@ -31,6 +32,16 @@
 					<h:outputText value="Corpo" />
 				</f:facet>
 				<h:outputText value="#{nota.body}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Ações" />
+				</f:facet>
+				<h:link value="Editar" outcome="editar">
+					<f:param name="id" value="#{nota.id}" />
+				</h:link>
+				<h:commandLink value="Remover" action="#{notaBean.remover(nota.id)}" />
+				<br/>
 			</p:column>
 		</p:dataTable>
 	</h:form>

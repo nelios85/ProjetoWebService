@@ -5,20 +5,42 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.devmedia.notas.NotaRest;
 import br.com.devmedia.notas.Notas;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class NotaBean {
 	private Integer id;
 	private Notas nota;
-	private List<Notas> notas;	
+	private List<Notas> notas;
+	private NotaRest notaRest = new NotaRest();
 	
 	public void initDetalhes() {
-		NotaRest notaRest = new NotaRest();
-		this.nota = notaRest.obter(id);
+		if(this.id != null) {
+			this.nota = notaRest.obter(id);
+		} else {
+			this.nota = new Notas();
+		}
+	}
+	
+	public String editar() {
+		if(this.id != null) {
+			notaRest.atualizar(this.nota);
+		} else {
+			notaRest.inserir(this.nota);
+		}
+		
+		this.notas =  notaRest.listar();
+		return "index";
+	}
+	
+	public String remover(Integer id) {
+		notaRest.remover(id);
+		this.notas = notaRest.listar();
+		return "index";
 	}
 	
 	public Integer getId() {
@@ -47,15 +69,11 @@ public class NotaBean {
 
 	@PostConstruct
 	public void init() {
-		NotaRest notaRest = new NotaRest();
 		notas = notaRest.listar();
 	}
 	
 	public String exibir(Notas nota) {
 		this.nota = nota;
 		return "detalhes";
-		
 	}
-
-	
 }
